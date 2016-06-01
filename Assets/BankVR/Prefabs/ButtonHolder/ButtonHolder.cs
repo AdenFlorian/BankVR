@@ -19,8 +19,8 @@ public class ButtonHolder : MonoBehaviour {
 
     void Awake()
     {
-        state = ButtonHolderState.Up;
-        highestY = transform.position.y;
+        state = ButtonHolderState.Rising;
+        //highestY = transform.position.y;
     }
 
 	// Use this for initialization
@@ -51,7 +51,9 @@ public class ButtonHolder : MonoBehaviour {
                 Vector3 newPos = transform.position;
                 newPos.y = lowestY;
                 transform.position = newPos;
-                state = ButtonHolderState.Down;
+                // TODO
+                //state = ButtonHolderState.Down;
+                state = ButtonHolderState.Rising;
             }
         } else if (state == ButtonHolderState.Rising)
         {
@@ -68,9 +70,9 @@ public class ButtonHolder : MonoBehaviour {
         }
     }
 
-    void OnButtonPress()
+    public void OnButtonPress()
     {
-        if (state == ButtonHolderState.Up || state == ButtonHolderState.Rising)
+        if (state == ButtonHolderState.Up)
         {
             state = ButtonHolderState.Lowering;
         }
