@@ -126,6 +126,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &143148
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 463040}
+  m_Layer: 0
+  m_Name: buttonTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &156536
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,6 +156,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &169956
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 423122}
+  m_Layer: 0
+  m_Name: buttonPressedTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &196088
 GameObject:
   m_ObjectHideFlags: 1
@@ -205,7 +235,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalPosition: {x: 0, y: -3, z: -0.215}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -215,6 +245,20 @@ Transform:
   - {fileID: 480264}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &423122
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169956}
+  m_LocalRotation: {x: -0.70710677, y: -0.0000000037252899, z: 0.000000059604638,
+    w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0.26, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 480264}
+  m_RootOrder: 3
 --- !u!4 &430268
 Transform:
   m_ObjectHideFlags: 1
@@ -243,6 +287,20 @@ Transform:
   - {fileID: 430268}
   m_Father: {fileID: 423054}
   m_RootOrder: 2
+--- !u!4 &463040
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143148}
+  m_LocalRotation: {x: -0.70710677, y: -0.0000000074505793, z: 0.000000029802317,
+    w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.7273122, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 480264}
+  m_RootOrder: 2
 --- !u!4 &476066
 Transform:
   m_ObjectHideFlags: 1
@@ -269,6 +327,8 @@ Transform:
   m_Children:
   - {fileID: 491820}
   - {fileID: 404430}
+  - {fileID: 463040}
+  - {fileID: 423122}
   m_Father: {fileID: 423054}
   m_RootOrder: 3
 --- !u!4 &491820
@@ -627,10 +687,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonHolder: {fileID: 11475826}
-  maxLocalPosition: {x: 1, y: 0.9, z: 0}
-  minLocalPosition: {x: -1, y: 0.5, z: 0}
-  targetLocalPosition: {x: 0, y: 0, z: 0}
-  forceMulti: 100
+  target: {fileID: 463040}
+  targetPressed: {fileID: 423122}
+  maxDistanceThresholdPressed: 0.06
 --- !u!114 &11488934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -643,10 +702,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonHolder: {fileID: 0}
-  maxLocalPosition: {x: 0, y: 0, z: 0}
-  minLocalPosition: {x: 0, y: 0, z: 0}
-  targetLocalPosition: {x: 0, y: 0, z: 0}
-  forceMulti: 1
+  target: {fileID: 0}
+  targetPressed: {fileID: 0}
+  maxDistanceThresholdPressed: 0.1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

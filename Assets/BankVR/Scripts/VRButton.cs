@@ -1,59 +1,66 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System;
 
 public class VRButton : MonoBehaviour {
 
     public ButtonHolder buttonHolder;
-    public Vector3 maxLocalPosition;
-    public Vector3 minLocalPosition;
-    public Vector3 targetLocalPosition;
-    public float forceMulti = 1f;
-
+    public Transform target;
+    public Transform targetPressed;
     new Rigidbody rigidbody;
 
-    // Use this for initialization
-    void Start () {
+    [Range(0f, 2f)]
+    public float maxDistanceThresholdPressed = 0.1f;
+
+    void Start()
+    {
         rigidbody = GetComponent<Rigidbody>();
-        targetLocalPosition = transform.localPosition;
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-        // Need to constrain it's position along a line
-        Vector3 startLocalPos = transform.localPosition;
-        Vector3 newPos = startLocalPos;
-        //newPos.y = -newPos.z;
-        //transform.localPosition = newPos;
+    }
 
+    void FixedUpdate()
+    {
+        DoPosition();
+        DoRotation();
+        CheckIfPressed();
+    }
 
+    public void SetTarget(Transform target)
+    {
+        this.target = target;
+    }
 
-        if (startLocalPos.x > maxLocalPosition.x) {
-            newPos.x = maxLocalPosition.x;
-        } else if (startLocalPos.x < minLocalPosition.x) {
-            newPos.x = minLocalPosition.x;
+    void DoPosition()
+    {
+        // Get vector from current position to parent's position
+        Vector3 forceToParentPosition = target.position - transform.position;
+
+        // Divide by fixed timestep (default is 0.2f)
+        // so that we will get where we want to go in one step
+        forceToParentPosition = forceToParentPosition / Time.fixedDeltaTime;
+
+        // Subtract existing velocity
+        forceToParentPosition = forceToParentPosition - rigidbody.velocity;
+
+        // Add force as a VelocityChange, so it ignores mass, and effectively just sets our velocity
+        rigidbody.AddForce(forceToParentPosition, ForceMode.VelocityChange);
+    }
+
+    void DoRotation()
+    {
+        rigidbody.rotation = target.rotation;
+    }
+
+    void CheckIfPressed()
+    {
+        var distanceToPressedTarget = Vector3.Distance(transform.position, targetPressed.position);
+        Debug.Log(distanceToPressedTarget);
+        if (distanceToPressedTarget < maxDistanceThresholdPressed)
+        {
             OnPressed();
         }
-        if (startLocalPos.y > maxLocalPosition.y) {
-            newPos.y = maxLocalPosition.y;
-        } else if (startLocalPos.y < minLocalPosition.y) {
-            newPos.y = minLocalPosition.y;
-            OnPressed();
-        }
-        if (startLocalPos.z > maxLocalPosition.z) {
-            newPos.z = maxLocalPosition.z;
-        } else if (startLocalPos.z < minLocalPosition.z) {
-            newPos.z = minLocalPosition.z;
-            OnPressed();
-        }
-
-        //transform.localPosition = newPos;
-        rigidbody.MovePosition(transform.parent.localToWorldMatrix.MultiplyPoint(newPos));
-
-        Vector3 currentToTargetVec = (targetLocalPosition - startLocalPos).normalized;
-        rigidbody.AddForce(currentToTargetVec * forceMulti * Time.fixedDeltaTime);
     }
 
     void OnPressed() {
+        Debug.Log("PRESSED");
         buttonHolder.OnButtonPress();
     }
 }
