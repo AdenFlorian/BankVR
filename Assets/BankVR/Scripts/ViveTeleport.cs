@@ -20,8 +20,6 @@ public class ViveTeleport : MonoBehaviour {
 
         Debug.DrawRay(transform.position, rayDirection, Color.red, 0.1f);
 
-        Ray ray = new Ray(transform.position, rayDirection);
-
         RaycastHit hit;
 
         if (Physics.Raycast(transform.position, rayDirection, out hit)) {
