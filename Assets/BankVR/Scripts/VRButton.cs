@@ -52,7 +52,7 @@ public class VRButton : MonoBehaviour {
     void CheckIfPressed()
     {
         var distanceToPressedTarget = Vector3.Distance(transform.position, targetPressed.position);
-        Debug.Log(distanceToPressedTarget);
+        //Debug.Log(distanceToPressedTarget);
         if (distanceToPressedTarget < maxDistanceThresholdPressed)
         {
             OnPressed();

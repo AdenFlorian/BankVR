@@ -12,8 +12,10 @@ public class Hand : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-        DoPosition();
-        DoRotation();
+        if (target != null) {
+            DoPosition();
+            DoRotation();
+        }
     }
 
     public void SetTarget(Transform target) {
