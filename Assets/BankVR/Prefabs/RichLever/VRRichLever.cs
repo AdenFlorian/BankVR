@@ -3,6 +3,8 @@ using System.Collections;
 
 public class VRRichLever : MonoBehaviour {
 
+    public MonoBehaviour leverListener;
+
     public float rotationTriggerAMax = 60f;
     public float rotationTriggerAMin = 10f;
     public float rotationTriggerBMax = 350f;
@@ -40,10 +42,12 @@ public class VRRichLever : MonoBehaviour {
     void OnTriggerA() {
         Debug.Log("Lever Trigger A");
         lastTrigger = LeverTrigger.A;
+        leverListener.SendMessage("OnLeverTriggerA", SendMessageOptions.DontRequireReceiver);
     }
 
     void OnTriggerB() {
         Debug.Log("Lever Trigger B");
         lastTrigger = LeverTrigger.B;
+        leverListener.SendMessage("OnLeverTriggerB", SendMessageOptions.DontRequireReceiver);
     }
 }
