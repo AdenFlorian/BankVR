@@ -7,7 +7,7 @@ public class VRGrabber : MonoBehaviour {
 
     VRGrabbable grabbedObject = null;
     VRGrabbable highlightedGrabbableObject = null;
-    bool canGrabSomething = false;
+    bool canGrabSomething = true;
     
 	void Start() {
 	
@@ -47,6 +47,11 @@ public class VRGrabber : MonoBehaviour {
     void TryToGrabHighlightedGrabbable() {
         if (highlightedGrabbableObject == null) {
             Debug.Log("You are grabbing at air...");
+            return;
+        }
+
+        if (canGrabSomething == false) {
+            Debug.Log("YOU...SHALL NOT....GRAB!!!");
             return;
         }
 

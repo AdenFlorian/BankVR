@@ -42,12 +42,18 @@ public class VRRichLever : MonoBehaviour {
     void OnTriggerA() {
         Debug.Log("Lever Trigger A");
         lastTrigger = LeverTrigger.A;
+        if (leverListener == null) {
+            Debug.LogWarning("leverListener not set!");
+        }
         leverListener.SendMessage("OnLeverTriggerA", SendMessageOptions.DontRequireReceiver);
     }
 
     void OnTriggerB() {
         Debug.Log("Lever Trigger B");
         lastTrigger = LeverTrigger.B;
+        if (leverListener == null) {
+            Debug.LogWarning("leverListener not set!");
+        }
         leverListener.SendMessage("OnLeverTriggerB", SendMessageOptions.DontRequireReceiver);
     }
 }
